@@ -2,6 +2,28 @@
 
 A comprehensive tax payment system with a Django backend, testing frontend, and future Flutter mobile app integration.
 
+## Screenshots
+
+### Welcome Page
+![Welcome Page](Screenshots/Welcome%20Page.png)
+*Landing page with testing instructions and quick access to all features*
+
+### Tax Dashboard
+![Tax Dashboard](Screenshots/Tax%20Dashboard.png)
+*Dashboard showing all tax records and their current status*
+
+### Payments Page
+![Payments Page](Screenshots/Payments%20Page.png)
+*Make payments and view payment history*
+
+### Document Upload
+![Document Upload](Screenshots/Document%20Upload.png)
+*Upload and manage tax-related documents*
+
+### Notifications
+![Notifications](Screenshots/Notifications.png)
+*View and manage system notifications*
+
 ## Project Structure
 
 ```

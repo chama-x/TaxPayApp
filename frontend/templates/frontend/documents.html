@@ -1,0 +1,113 @@
+{% extends 'frontend/base.html' %}
+
+{% block title %}Documents{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Upload Document</h5>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Document Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="document_type" class="form-label">Document Type</label>
+                        <select class="form-select" id="document_type" name="document_type" required>
+                            <option value="ASSESSMENT">Assessment Tax Document</option>
+                            <option value="BUSINESS">Business Tax Document</option>
+                            <option value="INDUSTRIAL">Industrial Tax Document</option>
+                            <option value="TRADE">Trade License Document</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="document" class="form-label">File</label>
+                        <input type="file" class="form-control" id="document" name="document" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload Document</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">My Documents</h5>
+            </div>
+            <div class="card-body">
+                {% if documents.results %}
+                    {% for document in documents.results %}
+                    <div class="mb-3 p-3 border rounded">
+                        <h6>{{ document.title }}</h6>
+                        <p><strong>Type:</strong> {{ document.document_type }}</p>
+                        <p><strong>Uploaded:</strong> {{ document.uploaded_at }}</p>
+                        <p><strong>Status:</strong> {{ document.status }}</p>
+                        <a href="{{ document.file.url }}" class="btn btn-sm btn-primary" target="_blank">View Document</a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No documents found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Available Forms Section -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Available Forms</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>Assessment Tax Form</h6>
+                                <p class="small">Form for property tax assessment</p>
+                                <a href="#" class="btn btn-sm btn-primary">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>Business Tax Form</h6>
+                                <p class="small">Form for business registration</p>
+                                <a href="#" class="btn btn-sm btn-primary">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>Industrial Tax Form</h6>
+                                <p class="small">Form for industrial registration</p>
+                                <a href="#" class="btn btn-sm btn-primary">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6>Trade License Form</h6>
+                                <p class="small">Form for trade license application</p>
+                                <a href="#" class="btn btn-sm btn-primary">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

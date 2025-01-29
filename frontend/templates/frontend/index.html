@@ -1,0 +1,95 @@
+{% extends 'frontend/base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">Welcome to Tax Payment System</h4>
+            </div>
+            <div class="card-body">
+                <h5>Testing Instructions</h5>
+                <hr>
+                
+                <div class="mb-4">
+                    <h6>1. Authentication</h6>
+                    <ul>
+                        <li>Click <a href="{% url 'login' %}">Login</a> to access the system</li>
+                        <li>Use your admin credentials that you created with createsuperuser</li>
+                    </ul>
+                </div>
+
+                <div class="mb-4">
+                    <h6>2. Create Test Data</h6>
+                    <p>Use the Django admin interface to create test records:</p>
+                    <ul>
+                        <li>Go to <a href="/admin/" target="_blank">Admin Interface</a></li>
+                        <li>Create Assessment Tax records</li>
+                        <li>Create Business Tax records</li>
+                        <li>Create Industrial Tax records</li>
+                        <li>Create Trade License records</li>
+                    </ul>
+                </div>
+
+                <div class="mb-4">
+                    <h6>3. Test Features</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h6>Dashboard</h6>
+                                    <p>View all your tax records and their status</p>
+                                    <a href="{% url 'dashboard' %}" class="btn btn-primary btn-sm">Go to Dashboard</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h6>Payments</h6>
+                                    <p>Make payments and view payment history</p>
+                                    <a href="{% url 'payments' %}" class="btn btn-primary btn-sm">Go to Payments</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h6>Documents</h6>
+                                    <p>Upload and manage documents</p>
+                                    <a href="{% url 'documents' %}" class="btn btn-primary btn-sm">Go to Documents</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h6>Notifications</h6>
+                                    <p>View and manage notifications</p>
+                                    <a href="{% url 'notifications' %}" class="btn btn-primary btn-sm">Go to Notifications</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h6>4. API Testing</h6>
+                    <p>Direct API endpoints for testing:</p>
+                    <ul>
+                        <li><a href="/api/assessment-tax/" target="_blank">Assessment Tax API</a></li>
+                        <li><a href="/api/business-tax/" target="_blank">Business Tax API</a></li>
+                        <li><a href="/api/industrial-tax/" target="_blank">Industrial Tax API</a></li>
+                        <li><a href="/api/trade-license/" target="_blank">Trade License API</a></li>
+                        <li><a href="/api/payments/" target="_blank">Payments API</a></li>
+                        <li><a href="/api/documents/" target="_blank">Documents API</a></li>
+                        <li><a href="/api/notifications/" target="_blank">Notifications API</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

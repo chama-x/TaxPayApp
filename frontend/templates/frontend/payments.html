@@ -1,0 +1,70 @@
+{% extends 'frontend/base.html' %}
+
+{% block title %}Payments{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Make Payment</h5>
+            </div>
+            <div class="card-body">
+                {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+                {% endif %}
+                
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="tax_type" class="form-label">Tax Type</label>
+                        <select class="form-select" id="tax_type" name="tax_type" required>
+                            <option value="ASSESSMENT" {% if request.GET.tax_type == 'ASSESSMENT' %}selected{% endif %}>Assessment Tax</option>
+                            <option value="BUSINESS" {% if request.GET.tax_type == 'BUSINESS' %}selected{% endif %}>Business Tax</option>
+                            <option value="INDUSTRIAL" {% if request.GET.tax_type == 'INDUSTRIAL' %}selected{% endif %}>Industrial Tax</option>
+                            <option value="TRADE" {% if request.GET.tax_type == 'TRADE' %}selected{% endif %}>Trade License</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="number" step="0.01" class="form-control" id="amount" name="amount" value="{{ request.GET.amount }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="payment_method" class="form-label">Payment Method</label>
+                        <select class="form-select" id="payment_method" name="payment_method" required>
+                            <option value="CREDIT">Credit Card</option>
+                            <option value="DEBIT">Debit Card</option>
+                            <option value="AMEX">American Express</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Make Payment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Payment History</h5>
+            </div>
+            <div class="card-body">
+                {% if payments.results %}
+                    {% for payment in payments.results %}
+                    <div class="mb-3 p-3 border rounded">
+                        <p><strong>Tax Type:</strong> {{ payment.tax_type }}</p>
+                        <p><strong>Amount:</strong> ${{ payment.amount }}</p>
+                        <p><strong>Date:</strong> {{ payment.payment_date }}</p>
+                        <p><strong>Method:</strong> {{ payment.payment_method }}</p>
+                        <p><strong>Status:</strong> {{ payment.status }}</p>
+                        <p><strong>Transaction ID:</strong> {{ payment.transaction_id }}</p>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No payment history found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

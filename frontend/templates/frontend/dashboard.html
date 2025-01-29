@@ -1,0 +1,119 @@
+{% extends 'frontend/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h2>Tax Dashboard</h2>
+
+<div class="row mt-4">
+    <!-- Assessment Tax -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Assessment Tax</h5>
+            </div>
+            <div class="card-body">
+                {% if assessment_tax.results %}
+                    {% for tax in assessment_tax.results %}
+                    <div class="mb-3">
+                        <p><strong>Property ID:</strong> {{ tax.property_id }}</p>
+                        <p><strong>Amount:</strong> ${{ tax.amount }}</p>
+                        <p><strong>Due Date:</strong> {{ tax.due_date }}</p>
+                        <p><strong>Status:</strong> {{ tax.status }}</p>
+                        {% if tax.installment_option %}
+                        <p><strong>Installments Paid:</strong> {{ tax.installments_paid }}/{{ tax.total_installments }}</p>
+                        {% endif %}
+                        {% if tax.status == 'PENDING' %}
+                        <a href="{% url 'payments' %}?tax_type=ASSESSMENT&amount={{ tax.amount }}" class="btn btn-primary">Pay Now</a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No assessment tax records found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Business Tax -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Business Tax</h5>
+            </div>
+            <div class="card-body">
+                {% if business_tax.results %}
+                    {% for tax in business_tax.results %}
+                    <div class="mb-3">
+                        <p><strong>Business ID:</strong> {{ tax.business_id }}</p>
+                        <p><strong>Business Name:</strong> {{ tax.business_name }}</p>
+                        <p><strong>Amount:</strong> ${{ tax.amount }}</p>
+                        <p><strong>Due Date:</strong> {{ tax.due_date }}</p>
+                        <p><strong>Status:</strong> {{ tax.status }}</p>
+                        {% if tax.status == 'PENDING' %}
+                        <a href="{% url 'payments' %}?tax_type=BUSINESS&amount={{ tax.amount }}" class="btn btn-primary">Pay Now</a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No business tax records found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Industrial Tax -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Industrial Tax</h5>
+            </div>
+            <div class="card-body">
+                {% if industrial_tax.results %}
+                    {% for tax in industrial_tax.results %}
+                    <div class="mb-3">
+                        <p><strong>Industry ID:</strong> {{ tax.industry_id }}</p>
+                        <p><strong>Industry Name:</strong> {{ tax.industry_name }}</p>
+                        <p><strong>Amount:</strong> ${{ tax.amount }}</p>
+                        <p><strong>Due Date:</strong> {{ tax.due_date }}</p>
+                        <p><strong>Status:</strong> {{ tax.status }}</p>
+                        {% if tax.status == 'PENDING' %}
+                        <a href="{% url 'payments' %}?tax_type=INDUSTRIAL&amount={{ tax.amount }}" class="btn btn-primary">Pay Now</a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No industrial tax records found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Trade License -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Trade License</h5>
+            </div>
+            <div class="card-body">
+                {% if trade_license.results %}
+                    {% for license in trade_license.results %}
+                    <div class="mb-3">
+                        <p><strong>License ID:</strong> {{ license.license_id }}</p>
+                        <p><strong>Business Name:</strong> {{ license.business_name }}</p>
+                        <p><strong>Amount:</strong> ${{ license.amount }}</p>
+                        <p><strong>Due Date:</strong> {{ license.due_date }}</p>
+                        <p><strong>Status:</strong> {{ license.status }}</p>
+                        {% if license.status == 'PENDING' %}
+                        <a href="{% url 'payments' %}?tax_type=TRADE&amount={{ license.amount }}" class="btn btn-primary">Pay Now</a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No trade license records found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
